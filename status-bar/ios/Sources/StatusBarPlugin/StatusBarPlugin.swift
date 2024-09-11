@@ -35,12 +35,22 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
         let options = call.options!
 
         if let style = options["style"] as? String {
+            let newStyle: UIStatusBarStyle
             if style == "DARK" {
-                bridge?.statusBarStyle = .lightContent
+                newStyle = .lightContent
             } else if style == "LIGHT" {
-                bridge?.statusBarStyle = .darkContent
-            } else if style == "DEFAULT" {
-                bridge?.statusBarStyle = .default
+                newStyle = .darkContent
+            } else {
+                newStyle = .default
+            }
+            DispatchQueue.main.async { [weak self, newStyle] in
+                guard let self else { return }
+                if let rootVC = (UIApplication.shared.delegate?.window??.rootViewController as? CAPBridgeViewController) {
+                    rootVC.bridge?.statusBarStyle = newStyle
+                }
+                if options["isModalOpen"] as? Bool == true {
+                    bridge?.statusBarStyle = .lightContent
+                }
             }
         }
 
