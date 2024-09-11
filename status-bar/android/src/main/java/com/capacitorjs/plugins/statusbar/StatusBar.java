@@ -47,6 +47,9 @@ public class StatusBar {
 
         WindowInsetsControllerCompat windowInsetsControllerCompat = WindowCompat.getInsetsController(window, decorView);
         windowInsetsControllerCompat.setAppearanceLightStatusBars(!style.equals("DARK"));
+        StatusBarPluginDelegate delegate = ((StatusBarPluginDelegate) activity.getApplicationContext());
+        if (delegate != null)
+            delegate.didUpdateStatusBar(style);
     }
 
     private String getStyleForTheme() {
