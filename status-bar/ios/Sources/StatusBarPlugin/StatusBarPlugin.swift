@@ -54,7 +54,16 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func setStyle(_ call: CAPPluginCall) {
         let options = call.options!
         if let styleString = options["style"] as? String {
-            statusBar?.setStyle(style(fromString: styleString))
+            let newStyle = style(fromString: styleString)
+            DispatchQueue.main.async { [weak self, newStyle] in
+                guard let self else { return }
+                if let rootVC = (UIApplication.shared.delegate?.window??.rootViewController as? CAPBridgeViewController) {
+                    rootVC.bridge?.statusBarStyle = newStyle
+                }
+                if options["isModalOpen"] as? Bool == true {
+                    bridge?.statusBarStyle = .lightContent
+                }
+            }
         }
         call.resolve([:])
     }

@@ -229,9 +229,10 @@ of the space underneath it.
 
 #### StyleOptions
 
-| Prop        | Type                                    | Description                                               | Since |
-| ----------- | --------------------------------------- | --------------------------------------------------------- | ----- |
-| **`style`** | <code><a href="#style">Style</a></code> | <a href="#style">Style</a> of the text of the status bar. | 1.0.0 |
+| Prop              | Type                                    | Description                                                              | Since |
+| ----------------- | --------------------------------------- | ------------------------------------------------------------------------ | ----- |
+| **`style`**       | <code><a href="#style">Style</a></code> | <a href="#style">Style</a> of the text of the status bar.                | 1.0.0 |
+| **`isModalOpen`** | <code>boolean</code>                    | In iOS, passed if a modal is open and status bar should be lightContent. |       |
 
 
 #### BackgroundColorOptions

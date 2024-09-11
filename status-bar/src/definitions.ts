@@ -48,6 +48,10 @@ export interface StyleOptions {
    * @since 1.0.0
    */
   style: Style;
+  /**
+   * In iOS, passed if a modal is open and status bar should be lightContent.
+   */
+  isModalOpen?: boolean;
 }
 
 export enum Style {
