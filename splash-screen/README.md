@@ -141,7 +141,7 @@ In `capacitor.config.json`:
 In `capacitor.config.ts`:
 
 ```ts
-/// <reference types="@capacitor/splash-screen" />
+/// <reference types="@sina_kh/mtw-capacitor-splash-screen" />
 
 import { CapacitorConfig } from '@capacitor/cli';
 

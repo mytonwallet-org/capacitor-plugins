@@ -1,6 +1,6 @@
 {
-  "name": "@capacitor/splash-screen",
-  "version": "6.0.2",
+  "name": "@sina_kh/mtw-capacitor-splash-screen",
+  "version": "6.0.2-1",
   "description": "The Splash Screen API provides methods for showing or hiding a Splash image.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -19,10 +19,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mytonwallet-org/capacitor-plugins"
+    "url": "git+https://github.com/mytonwallet-org/capacitor-plugins.git"
   },
   "bugs": {
-    "url": "https://github.com/ionic-team/capacitor-plugins/issues"
+    "url": "https://github.com/mytonwallet-org/capacitor-plugins/issues"
   },
   "keywords": [
     "capacitor",
