@@ -1,6 +1,6 @@
 {
-  "name": "@capacitor/status-bar",
-  "version": "6.0.1",
+  "name": "@sina_kh/mtw-capacitor-status-bar",
+  "version": "6.0.1-1",
   "description": "The StatusBar API Provides methods for configuring the style of the Status Bar, along with showing or hiding it.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -19,10 +19,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/capacitor-plugins.git"
+    "url": "git+https://github.com/mytonwallet-org/capacitor-plugins.git"
   },
   "bugs": {
-    "url": "https://github.com/ionic-team/capacitor-plugins/issues"
+    "url": "https://github.com/mytonwallet-org/capacitor-plugins/issues"
   },
   "keywords": [
     "capacitor",
