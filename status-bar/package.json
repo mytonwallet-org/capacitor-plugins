@@ -40,8 +40,8 @@
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
     "docgen": "docgen --api StatusBarPlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
-    "clean": "rimraf ./dist",
+    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs && npm pack && mv capacitor-status-bar-*.tgz dist.tgz",
+    "clean": "rimraf ./dist dist.tgz",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
     "publish:cocoapod": "pod trunk push ./CapacitorStatusBar.podspec --allow-warnings"
