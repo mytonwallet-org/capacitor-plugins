@@ -15,22 +15,21 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "show", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "hide", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "getInfo", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "setOverlaysWebView", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setOverlaysWebView", returnType: CAPPluginReturnPromise)
     ]
     private var statusBar: StatusBar?
     private let statusBarVisibilityChanged = "statusBarVisibilityChanged"
     private let statusBarOverlayChanged = "statusBarOverlayChanged"
-    
+
     override public func load() {
         guard let bridge = bridge else { return }
         statusBar = StatusBar(bridge: bridge, config: statusBarConfig())
     }
-    
+
     private func statusBarConfig() -> StatusBarConfig {
         var config = StatusBarConfig()
         config.overlaysWebView = getConfig().getBoolean("overlaysWebView", config.overlaysWebView)
-        if let colorConfig = getConfig().getString("backgroundColor"), let color = UIColor.capacitor.color(fromHex: colorConfig)
-        {
+        if let colorConfig = getConfig().getString("backgroundColor"), let color = UIColor.capacitor.color(fromHex: colorConfig) {
             config.backgroundColor = color
         }
         if let configStyle = getConfig().getString("style") {
@@ -38,7 +37,7 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         return config
     }
-    
+
     private func style(fromString: String) -> UIStatusBarStyle {
         switch fromString.lowercased() {
         case "dark", "lightcontent":
@@ -55,7 +54,16 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func setStyle(_ call: CAPPluginCall) {
         let options = call.options!
         if let styleString = options["style"] as? String {
-            statusBar?.setStyle(style(fromString: styleString))
+            let newStyle = style(fromString: styleString)
+            DispatchQueue.main.async { [weak self, newStyle] in
+                guard let self else { return }
+                if let rootVC = (UIApplication.shared.delegate?.window??.rootViewController as? CAPBridgeViewController) {
+                    rootVC.bridge?.statusBarStyle = newStyle
+                }
+                if options["isModalOpen"] as? Bool == true {
+                    bridge?.statusBarStyle = .lightContent
+                }
+            }
         }
         call.resolve([:])
     }
@@ -70,7 +78,7 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         call.resolve()
     }
-    
+
     @objc func hide(_ call: CAPPluginCall) {
         let animation = call.getString("animation", "FADE")
         DispatchQueue.main.async { [weak self] in
@@ -80,7 +88,7 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
                 let dict = self?.toDict(info),
                 let event = self?.statusBarVisibilityChanged
             else { return }
-            self?.notifyListeners(event, data: dict);
+            self?.notifyListeners(event, data: dict)
         }
         call.resolve()
     }
@@ -94,11 +102,11 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
                 let dict = self?.toDict(info),
                 let event = self?.statusBarVisibilityChanged
             else { return }
-            self?.notifyListeners(event, data: dict);
+            self?.notifyListeners(event, data: dict)
         }
         call.resolve()
     }
-    
+
     @objc func getInfo(_ call: CAPPluginCall) {
         DispatchQueue.main.async { [weak self] in
             guard
@@ -118,11 +126,11 @@ public class StatusBarPlugin: CAPPlugin, CAPBridgedPlugin {
                 let dict = self?.toDict(info),
                 let event = self?.statusBarOverlayChanged
             else { return }
-            self?.notifyListeners(event, data: dict);
+            self?.notifyListeners(event, data: dict)
         }
         call.resolve()
     }
-    
+
     private func toDict(_ info: StatusBarInfo) -> [String: Any] {
         return [
             "visible": info.visible!,

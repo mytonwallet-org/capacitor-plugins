@@ -57,11 +57,11 @@ const showStatusBar = async () => {
 
 These config values are available:
 
-| Prop                  | Type                 | Description                                                                                                 | Default              | Since |
-| --------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------- | -------------------- | ----- |
-| **`overlaysWebView`** | <code>boolean</code> | Whether the statusbar is overlaid or not.                                                                   | <code>true</code>    | 1.0.0 |
-| **`style`**           | <code>string</code>  | <a href="#style">Style</a> of the text of the status bar.                                                   | <code>default</code> | 1.0.0 |
-| **`backgroundColor`** | <code>string</code>  | Color of the background of the statusbar in hex format, #RRGGBB. Doesn't work if `overlaysWebView` is true. | <code>#000000</code> | 1.0.0 |
+| Prop                  | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                      | Default              | Since |
+| --------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ----- |
+| **`overlaysWebView`** | <code>boolean</code> | Whether the statusbar is overlaid or not. For applications targeting Android 15, this property has no effect unless the property windowOptOutEdgeToEdgeEnforcement is added to the application layout file. Otherwise, the application assumes always overlays as true. More details in https://developer.android.com/reference/android/R.attr#windowOptOutEdgeToEdgeEnforcement | <code>true</code>    | 1.0.0 |
+| **`style`**           | <code>string</code>  | <a href="#style">Style</a> of the text of the status bar.                                                                                                                                                                                                                                                                                                                        | <code>default</code> | 1.0.0 |
+| **`backgroundColor`** | <code>string</code>  | Color of the background of the statusbar in hex format, #RRGGBB. Doesn't work if `overlaysWebView` is true.                                                                                                                                                                                                                                                                      | <code>#000000</code> | 1.0.0 |
 
 ### Examples
 
@@ -229,9 +229,10 @@ of the space underneath it.
 
 #### StyleOptions
 
-| Prop        | Type                                    | Description                                               | Since |
-| ----------- | --------------------------------------- | --------------------------------------------------------- | ----- |
-| **`style`** | <code><a href="#style">Style</a></code> | <a href="#style">Style</a> of the text of the status bar. | 1.0.0 |
+| Prop              | Type                                    | Description                                                              | Since |
+| ----------------- | --------------------------------------- | ------------------------------------------------------------------------ | ----- |
+| **`style`**       | <code><a href="#style">Style</a></code> | <a href="#style">Style</a> of the text of the status bar.                | 1.0.0 |
+| **`isModalOpen`** | <code>boolean</code>                    | In iOS, passed if a modal is open and status bar should be lightContent. |       |
 
 
 #### BackgroundColorOptions
@@ -270,11 +271,11 @@ of the space underneath it.
 
 #### Style
 
-| Members       | Value                  | Description                                                                                                                                                                                                                                            | Since |
-| ------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
-| **`Dark`**    | <code>'DARK'</code>    | Light text for dark backgrounds.                                                                                                                                                                                                                       | 1.0.0 |
-| **`Light`**   | <code>'LIGHT'</code>   | Dark text for light backgrounds.                                                                                                                                                                                                                       | 1.0.0 |
-| **`Default`** | <code>'DEFAULT'</code> | The style is based on the device appearance. If the device is using Dark mode, the statusbar text will be light. If the device is using Light mode, the statusbar text will be dark. On Android the default will be the one the app was launched with. | 1.0.0 |
+| Members       | Value                  | Description                                                                                                                                                                          | Since |
+| ------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| **`Dark`**    | <code>'DARK'</code>    | Light text for dark backgrounds.                                                                                                                                                     | 1.0.0 |
+| **`Light`**   | <code>'LIGHT'</code>   | Dark text for light backgrounds.                                                                                                                                                     | 1.0.0 |
+| **`Default`** | <code>'DEFAULT'</code> | The style is based on the device appearance. If the device is using Dark mode, the statusbar text will be light. If the device is using Light mode, the statusbar text will be dark. | 1.0.0 |
 
 
 #### Animation
